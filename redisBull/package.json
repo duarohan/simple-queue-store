@@ -1,0 +1,21 @@
+{
+  "name": "amazonmq",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "DEBUG=*,-follow-redirects,-body-parser*,-express:router ./node_modules/.bin/forever -a start --uid \"redisBull\" ./bin/www",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "stop": "./node_modules/.bin/forever stop redisBull"
+  },
+  "author": "Rohan D",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "bull":"^3.27.0",
+    "bull-board":"2.1.3",
+    "express": "^4.17.1",
+    "forever": "^0.15.3",
+    "forever-monitor": "^1.7.1"
+  }
+}

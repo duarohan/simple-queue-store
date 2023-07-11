@@ -1,0 +1,11 @@
+#!/bin/bash
+# Copyright (c) 2017 Square Panda Inc.
+# All Rights Reserved.
+# Dissemination, use, or reproduction of this material is strictly forbidden
+# unless prior written permission is obtained from Square Panda Inc.
+# @Last modified by:   arjun
+
+echo "Smoke test"
+service_name='game-data-service'
+./node_modules/.bin/forever list | grep "${service_name}"
+exit $?

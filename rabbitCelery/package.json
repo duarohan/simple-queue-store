@@ -1,0 +1,20 @@
+{
+  "name": "amazonmq",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "DEBUG=*,-follow-redirects,-body-parser*,-express:router ./node_modules/.bin/forever start --uid \"rabbitCelery\" ./bin/www",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "stop": "./node_modules/.bin/forever stop rabbitCelery"
+  },
+  "author": "Rohan D",
+  "license": "ISC",
+  "dependencies": {
+    "celery-node": "^0.5.5",
+    "body-parser": "^1.18.2",
+    "express": "^4.17.1",
+    "forever": "^0.15.3",
+    "forever-monitor": "^1.7.1"
+  }
+}

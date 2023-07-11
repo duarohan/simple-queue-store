@@ -1,0 +1,43 @@
+#!/bin/bash
+# Copyright (c) 2017 Square Panda Inc.
+# All Rights Reserved.
+# Dissemination, use, or reproduction of this material is strictly forbidden
+# unless prior written permission is obtained from Square Panda Inc.
+# @Last modified by:   Gaurang Pansare
+
+echo "Starting initialization"
+
+# Node js is required
+node_check=$(command -v node)
+if [[ -z "${node_check}" || !($(node --version) == v10*) ]]; then
+  echo "Intalling node v10"
+
+  # Fetch official setup script
+  curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+  if [[ "$?" != "0" ]]; then
+    echo "ERROR: Failed to get setup script for required package node js."
+    exit 1
+  fi
+
+  # Go get and install packages
+  sudo apt-get install -y nodejs
+  if [[ "$?" != "0" ]]; then
+    echo "ERROR: Failed to install required package node js."
+    exit 2
+  fi
+else
+  echo "Node v10 already installed"
+fi
+
+sudo apt-get -y install erlang
+sudo apt-get -y install rabbitmq-server
+sudo systemctl enable rabbitmq-server
+sudo systemctl start rabbitmq-server
+
+sudo rabbitmq-plugins enable rabbitmq_management
+
+sudo rabbitmqctl add_user admin admin
+sudo rabbitmqctl set_user_tags admin administrator
+sudo rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
+
+echo "Completed initialzation"
